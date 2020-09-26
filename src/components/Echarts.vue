@@ -7,47 +7,55 @@
 <script>
 import echarts from "echarts";
 
-
 export default {
-  props:["orderData"],
+  props: {
+    orderData: {
+      type: Object,
+      default() {
+        return {
+          xAxis: [],
+          series: [],
+        };
+      },
+    },
+    isAxisChart: {
+      type: Boolean,
+      default: true,
+    },
+  },
   mounted() {
-   
-      this.fn();
-   
-   
+    this.fn();
+  },
+  computed: {
+    option() {
+      // 如果需要y轴坐标
+      if (this.isAxisChart) {
+        return {
+          xAxis: { data: this.orderData.xData },
+          series: this.orderData.series,
+          yAxis: {
+            type: "value",
+          },
+        };
+      }else{
+        return {
+           series: this.orderData.series,
+        }
+      }
+    },
   },
   data() {
-    return {
-      option: {
-        title: {
-          text: "ECharts 入门示例",
-        },
-        tooltip: {},
-        legend: {
-          data: ["销量"],
-        },
-        xAxis: {
-          data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
-        },
-        yAxis: {},
-        series: [
-          {
-            name: "销量",
-            type: "bar",
-            data: [5, 20, 36, 10, 10, 20],
-          },
-        ],
-      },
-    };
+    return {};
   },
   methods: {
-    fn(){
-    console.log(55);
-    console.log(this.orderData);
-    console.log(55); 
-     var ss= echarts.init(this.$refs.echart);
-     // ss.setOption(this.orderData);
-    }
+    fn() {
+      console.log(55);
+      console.log(this.orderData);
+      console.log(55);
+      var ss = echarts.init(this.$refs.echart);
+      console.log(this.option);
+      ss.setOption(this.option);
+    },
   },
 };
 </script>

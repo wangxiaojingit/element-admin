@@ -55,10 +55,10 @@
         </div>
         <div class="bottom">
           <div class="user">
-            <echarts></echarts>
+            <!-- <echarts></echarts> -->
           </div>
           <div class="course">
-            <echarts></echarts>
+            <!-- <echarts></echarts> -->
           </div>
         </div>
       </div>
